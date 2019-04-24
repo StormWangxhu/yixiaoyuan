@@ -18,26 +18,26 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//Generate 产生的意思，IDENTITY主键则由数据库自动维护，使用起来很简单
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Integer id ;
+    private Integer id;
 
     /**
      * 用户id
      */
     @Column(nullable = false)//设置列的属性，非空
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Integer uid ;
+    private Integer uid;
 
     /**
      * 省市
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String province ;
+    private String province;
 
     /**
      * 详细地址
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String detailedAddress ;
+    private String detailedAddress;
 
     /**
      * 是否详细地址

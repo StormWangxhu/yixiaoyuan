@@ -19,45 +19,45 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Integer id ;
+    private Integer id;
 
     /**
      * 商品Id
      */
     @Column(nullable = false)
-    private Integer gid ;
+    private Integer gid;
 
     /**
      * 发帖用户id
      */
     @Column(nullable = false)
-    private Integer uidLeader ;
+    private Integer uidLeader;
 
     /**
      * 跟帖用户id
      */
     @Column(nullable = false)
-    private Integer uidFollower ;
+    private Integer uidFollower;
 
     /**
      * 发帖用户评论内容
      */
-    private String contentLeader ;
+    private String contentLeader;
 
     /**
      * 跟帖用户评论内容
      */
-    private String contentFollower ;
+    private String contentFollower;
 
     /**
      * 发帖用户评论时间
      */
-    private Date leaderCallbackTime ;
+    private Date leaderCallbackTime;
 
     /**
      * 跟帖用户评论时间
      */
-    private Date followerCommentTime ;
+    private Date followerCommentTime;
 
     public Integer getId() {
         return id;

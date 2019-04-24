@@ -19,34 +19,34 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Integer id ;
+    private Integer id;
 
     /**
      * 用户id
      */
     @Column(nullable = false)
-    private Integer uid ;
+    private Integer uid;
 
     /**
      * 商品id
      */
     @Column(nullable = false)//nullable 的意思是可空
-    private Integer gid ;
+    private Integer gid;
 
     /**
      * 订单创建时间
      */
-    private Date createTime ;
+    private Date createTime;
 
     /**
      * 订单付款时间
      */
-    private Date payTime ;
+    private Date payTime;
 
     /**
      * 订单编号
      */
-    private Long number ;
+    private Long number;
 
     /**
      * 订单是否完成，默认无

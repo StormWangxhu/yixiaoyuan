@@ -16,48 +16,49 @@ import javax.persistence.*;
 public class User {
 
     @Id//作用：设置对象标识符
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//作用：设置标识符的生成策略，常与@Id一起使用。IDENTITY：适用于MySQL,主键由数据库自动生成（主要是自动增长型)  JPA标准用法
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//作用：设置标识符的生成策略，常与@Id一起使用。IDENTITY：适用于MySQL,主键由数据库自动生成（主要是自动增长型)  JPA标准用法
     @JsonInclude(JsonInclude.Include.NON_EMPTY)//使用 @JsonInclude 注解可以控制在哪些情况下才将被注解的属性转换成 json，例如只有属性不为 null 时。
-    private Integer id ;
+    private Integer id;
 
     /**
      * 用户性别，0-男，1-女
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Integer gender ;
+    private Integer gender;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String username ;
+    private String username;
 
     /**
      * 用户微信名，可得到
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String nickname ;
+    private String nickname;
 
     /**
      * 用户头像
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String avatar ;
+    private String avatar;
 
     /**
      * 用户手机号
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String phone ;
+    private String phone;
 
     /**
      * 用户QQ号
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String qq ;
+    private String qq;
 
     /**
      * 用户当前所在的地址
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String addressNow ;
+    private String addressNow;
 
     public Integer getId() {
         return id;
