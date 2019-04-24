@@ -1,0 +1,22 @@
+# spring 相关配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: xiaohu2815
+    url: jdbc:mysql://localhost:3306/yixiaoyuan?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+# Redis相关配置
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+
+# mybatis相关配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+
