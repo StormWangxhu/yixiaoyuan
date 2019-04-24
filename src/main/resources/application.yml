@@ -1,22 +1,10 @@
-# spring 相关配置
+# 通用配置，动态指定程序运行环境 默认为开发dev环境
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: xiaohu2815
-    url: jdbc:mysql://localhost:3306/yixiaoyuan?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    type: com.alibaba.druid.pool.DruidDataSource
-
-
-# Redis相关配置
-  redis:
-    host: 127.0.0.1
-    password:
-    port: 6379
-
-# mybatis相关配置
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-
-
+  profiles:
+    active: dev
+## 微信配置
+wx:
+  appid: wx6ddc68656ab9beb2
+  secret: 6260834be58b8469bfb17bf27fc1b183
+  url: https://api.weixin.qq.com/sns/jscode2session?appid=${wx.appid}&secret=${wx.secret}&grant_type=authorization_code&js_code=
 

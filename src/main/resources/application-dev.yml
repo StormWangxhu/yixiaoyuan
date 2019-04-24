@@ -1,0 +1,35 @@
+# 本地开发环境配置
+
+# http服务端口
+server:
+    port: 8091
+# DATASOURCE
+spring:
+  profiles: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/yixiaoyuan?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: xiaohu2815
+# jpa配置
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #不加这句则默认为myisam引擎,修改为innodb存储引擎
+  devtools:
+    restart:
+      # 热部署生效
+      enabled: true
+
+# 日志配置
+logging:
+  level:
+    org.springframework.web: warn
+    com.wangxhu.yixiaoyuan: warn
+  ## 以文件格式输出
+  pattern:
+    console: "[%-5level] %d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{36} - %msg%n"
+  file: yixiaoyuan.dev.log
