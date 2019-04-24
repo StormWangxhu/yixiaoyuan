@@ -23,6 +23,7 @@ HELP.md
 *.cmd
 *.xml
 mvnw
+*.log
 
 
 ### NetBeans ###
