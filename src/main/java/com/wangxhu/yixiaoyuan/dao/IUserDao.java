@@ -1,6 +1,7 @@
 package com.wangxhu.yixiaoyuan.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * @Author: StormWangxhu
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Description:
  */
 
+@Repository//作用和@Service作用一样
 @Mapper
 public interface IUserDao {
 }

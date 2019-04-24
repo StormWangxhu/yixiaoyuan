@@ -1294,3 +1294,9 @@ Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL synta
 [INFO ] 2019-04-24 14:25:51 [restartedMain] o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
 [WARN ] 2019-04-24 14:25:51 [restartedMain] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 [INFO ] 2019-04-24 14:25:51 [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8091 (http) with context path ''
+[INFO ] 2019-04-24 15:36:55 [Thread-26] o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+[INFO ] 2019-04-24 15:36:55 [Thread-26] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2019-04-24 15:36:55 [Thread-26] o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+[ERROR] 2019-04-24 15:36:55 [Thread-26] o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: drop table if exists order
+[INFO ] 2019-04-24 15:36:55 [Thread-26] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+[INFO ] 2019-04-24 15:36:55 [Thread-26] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
