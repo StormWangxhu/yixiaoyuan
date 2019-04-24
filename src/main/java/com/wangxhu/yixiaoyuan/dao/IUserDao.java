@@ -1,6 +1,8 @@
 package com.wangxhu.yixiaoyuan.dao;
 
+import com.wangxhu.yixiaoyuan.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,4 +15,11 @@ import org.springframework.stereotype.Repository;
 @Repository//作用和@Service作用一样
 @Mapper
 public interface IUserDao {
+
+    /**
+     * 根据openId查询用户
+     * @param openId
+     * @return
+     */
+    User getUserByOpenId(@Param("opneId") String openId);
 }

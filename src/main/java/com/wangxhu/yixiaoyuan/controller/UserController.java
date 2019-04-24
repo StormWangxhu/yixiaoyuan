@@ -1,12 +1,16 @@
 package com.wangxhu.yixiaoyuan.controller;
 
 import com.wangxhu.yixiaoyuan.constant.UserConstant;
+import com.wangxhu.yixiaoyuan.manager.ITokenManager;
+import com.wangxhu.yixiaoyuan.model.TokenModel;
+import com.wangxhu.yixiaoyuan.model.User;
 import com.wangxhu.yixiaoyuan.service.IUserService;
 import com.wangxhu.yixiaoyuan.utils.common.WeChatUtil;
 import com.wangxhu.yixiaoyuan.utils.result.Result;
 import com.wangxhu.yixiaoyuan.utils.result.ResultBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
 
 /**
  * @Author: StormWangxhu
@@ -38,15 +40,20 @@ public class UserController {
     @Autowired
     private WeChatUtil weChatUtil;
 
+    @Autowired
+    private ITokenManager tokenManager;
 
     @ApiOperation(value = UserConstant.LOGIN_DESC, httpMethod = "POST")
     @PostMapping("/login")
-    public Result<Object> login(@RequestBody String param) throws Exception {
-//        String code = userService.getCode(param);
-//        String openId = weChatUtil.getOpenId(code);
-//        Map<String, Integer> datas = userService.isLoginSuccess(openId);
-
-        return ResultBuilder.success();
+    public Result<TokenModel> login(@RequestBody @Param("code") String code) throws Exception {
+        LOGGER.info("用户登录code：{}", code);
+        String openId = weChatUtil.getOpenId(code);
+        User user = userService.login(openId);
+        Integer uid = user.getId();
+        //根据uid获取token
+        TokenModel tokenModel = tokenManager.createToken(uid);
+        //将uid和token返回给前端
+        return ResultBuilder.success(tokenModel);
     }
 
 

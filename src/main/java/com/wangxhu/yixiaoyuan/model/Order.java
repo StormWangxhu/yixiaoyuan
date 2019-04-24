@@ -1,4 +1,4 @@
-package com.wangxhu.yixiaoyuan.entity;
+package com.wangxhu.yixiaoyuan.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

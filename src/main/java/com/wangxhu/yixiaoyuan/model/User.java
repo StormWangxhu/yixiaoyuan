@@ -1,6 +1,7 @@
-package com.wangxhu.yixiaoyuan.entity;
+package com.wangxhu.yixiaoyuan.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.*;
 
@@ -21,6 +22,11 @@ public class User {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)//使用 @JsonInclude 注解可以控制在哪些情况下才将被注解的属性转换成 json，例如只有属性不为 null 时。
     private Integer id;
 
+    /**
+     * 微信给的openId
+     */
+    @Ignore
+    private String openId ;
     /**
      * 用户性别，0-男，1-女
      */
@@ -62,6 +68,14 @@ public class User {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public void setId(Integer id) {

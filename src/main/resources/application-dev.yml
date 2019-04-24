@@ -23,6 +23,13 @@ spring:
       # 热部署生效
       enabled: true
 
+
+  # redis配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+
 # 日志配置
 logging:
   level:
