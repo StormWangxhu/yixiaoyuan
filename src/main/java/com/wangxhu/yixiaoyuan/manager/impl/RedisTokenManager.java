@@ -45,4 +45,44 @@ public class RedisTokenManager implements ITokenManager {
         redisTemplate.boundValueOps(uid).set(token, TokenConstant.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
         return tokenModel;
     }
+
+    /**
+     * 解析出token
+     *
+     * @param authorization 加密后的字符串
+     * @return
+     */
+    @Override
+    public TokenModel getToken(String authorization) {
+        if (authorization == null || authorization.length() == 0) {
+            return null;
+        }
+        String[] param = authorization.split("_");
+        if (param.length != 2) {
+            return null;
+        }
+        Integer uid = Integer.parseInt(param[0]);
+        String token = param[1];
+        return new TokenModel(uid, token);
+    }
+
+    /**
+     * 检查token是否有效
+     *
+     * @param model token
+     * @return
+     */
+    @Override
+    public boolean checkToken(TokenModel model) {
+        if (model == null) {
+            return false;
+        }
+        String token = redisTemplate.boundValueOps(model.getUid()).get();
+        if (token == null || !token.trim().equals(model.getToken())) {
+            return false;
+        }
+        //检查成功，说明用户进行了一次有效操作，延长过期时间
+        redisTemplate.boundValueOps(model.getUid()).expire(TokenConstant.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
+        return true;
+    }
 }

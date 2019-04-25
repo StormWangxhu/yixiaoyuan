@@ -19,4 +19,19 @@ public interface ITokenManager {
      * @return
      */
     public TokenModel createToken(Integer uid);
+
+    /**
+     * 从字符串中解析出token
+     *
+     * @param authorization 加密后的字符串
+     * @return
+     */
+    TokenModel getToken(String authorization);
+
+    /**
+     * 检查token是否有效
+     * @param model token
+     * @return
+     */
+    boolean checkToken(TokenModel model);
 }

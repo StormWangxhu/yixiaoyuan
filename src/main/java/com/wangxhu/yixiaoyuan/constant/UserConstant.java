@@ -19,4 +19,10 @@ public class UserConstant {
     public static final String OPENID_NULL = "openId为null";
 
     public static final String SUCCESS = "成功！";
+
+    public static final String INSERT_NEW_GOODS_ADDRESS = "新增新的收获地址";
+
+    public static final String GET_ADDTESS_LIAT = "获取我的所有收获地址";
+
+    public static final String NO_RECORD = "该用户还没有收货地址";
 }

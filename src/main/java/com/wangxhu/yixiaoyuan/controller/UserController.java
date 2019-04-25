@@ -1,20 +1,28 @@
 package com.wangxhu.yixiaoyuan.controller;
 
+import com.wangxhu.yixiaoyuan.annotation.Authorization;
+import com.wangxhu.yixiaoyuan.annotation.CurrentUser;
 import com.wangxhu.yixiaoyuan.constant.UserConstant;
 import com.wangxhu.yixiaoyuan.manager.ITokenManager;
+import com.wangxhu.yixiaoyuan.model.Address;
 import com.wangxhu.yixiaoyuan.model.TokenModel;
 import com.wangxhu.yixiaoyuan.model.User;
+import com.wangxhu.yixiaoyuan.service.IAddressService;
 import com.wangxhu.yixiaoyuan.service.IUserService;
 import com.wangxhu.yixiaoyuan.utils.common.WeChatUtil;
 import com.wangxhu.yixiaoyuan.utils.result.Result;
 import com.wangxhu.yixiaoyuan.utils.result.ResultBuilder;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 /**
  * @Author: StormWangxhu
@@ -24,7 +32,7 @@ import org.slf4j.LoggerFactory;
  */
 
 
-@Api(value = "api/user", description = UserConstant.CONTROLLER_DESC)
+@Api(value = "api/user", description = UserConstant.CONTROLLER_DESC)//协议集描述
 @RequestMapping("api/user")
 @RestController
 public class UserController {
@@ -40,11 +48,14 @@ public class UserController {
     @Autowired
     private ITokenManager tokenManager;
 
-    @ApiOperation(value = UserConstant.LOGIN_DESC, httpMethod = "GET")
-    @GetMapping("/login/{code}")
-    public Result<TokenModel> login(@PathVariable("code") String code) throws Exception {
+    @Autowired
+    private IAddressService addressService;
+
+    @ApiOperation(value = UserConstant.LOGIN_DESC, httpMethod = "POST")//协议描述
+    @PostMapping("/login")
+    public Result<TokenModel> login(@RequestBody String code) throws Exception {
         LOGGER.info("用户登录code：{}", code);
-        System.out.println("用户登录code:"+code);
+        System.out.println("用户登录code:" + code);
         String openId = weChatUtil.getOpenId(code);
         User user = userService.login(openId);
         Integer uid = user.getId();
@@ -55,4 +66,37 @@ public class UserController {
     }
 
 
+    /**
+     * 保存用户新增的收获地址
+     *
+     * @param addressParam
+     * @param loginUser
+     * @return
+     */
+    @Authorization//自定义注解，在拦截器中检查token中需要用到。每个方法都需要加这个注解进行权限的验证
+    @ApiOperation(value = UserConstant.INSERT_NEW_GOODS_ADDRESS, httpMethod = "PUT")
+    @PutMapping("/addAddress")
+    public Result<Object> saveGoodsAddress(@RequestBody Address addressParam, @ApiIgnore @CurrentUser User loginUser) {
+        boolean result = addressService.insertAddress(loginUser, addressParam);
+        return ResultBuilder.success();
+    }
+
+
+    /**
+     * 获取用户所有的收获地址
+     *
+     * @param loginUser
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = UserConstant.GET_ADDTESS_LIAT, httpMethod = "GET")
+    @GetMapping("/getAllGoodsAddress")
+    public Result<List<Address>> getAllGoodsAddress(@ApiIgnore @CurrentUser User loginUser) {
+        Integer uid = loginUser.getId();
+        List<Address> addressList = addressService.getAllGoodsAddress(uid);
+        if (addressList.size() == 0 || addressList == null) {
+            return ResultBuilder.fail(UserConstant.NO_RECORD);
+        }
+        return ResultBuilder.success(addressList);
+    }
 }
