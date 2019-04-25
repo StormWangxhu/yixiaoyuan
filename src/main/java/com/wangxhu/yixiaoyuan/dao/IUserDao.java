@@ -21,5 +21,5 @@ public interface IUserDao {
      * @param openId
      * @return
      */
-    User getUserByOpenId(@Param("opneId") String openId);
+    User getUserByOpenId(@Param("openId") String openId);
 }

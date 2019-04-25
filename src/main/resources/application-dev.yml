@@ -15,7 +15,7 @@ spring:
 # jpa配置
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #不加这句则默认为myisam引擎,修改为innodb存储引擎
   devtools:
@@ -29,6 +29,9 @@ spring:
     host: 127.0.0.1
     port: 6379
 
+# mybatis相关配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
 
 # 日志配置
 logging:

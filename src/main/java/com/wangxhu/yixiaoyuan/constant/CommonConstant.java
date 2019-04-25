@@ -9,5 +9,6 @@ package com.wangxhu.yixiaoyuan.constant;
 public class CommonConstant {
 
     public static final String WECHAT_CONNECT_FAIL = "连接微信失败！";
+
     public static final String OPENID_NULL = "code错误！";
 }

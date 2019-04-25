@@ -12,10 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,10 +40,11 @@ public class UserController {
     @Autowired
     private ITokenManager tokenManager;
 
-    @ApiOperation(value = UserConstant.LOGIN_DESC, httpMethod = "POST")
-    @PostMapping("/login")
-    public Result<TokenModel> login(@RequestBody @Param("code") String code) throws Exception {
+    @ApiOperation(value = UserConstant.LOGIN_DESC, httpMethod = "GET")
+    @GetMapping("/login/{code}")
+    public Result<TokenModel> login(@PathVariable("code") String code) throws Exception {
         LOGGER.info("用户登录code：{}", code);
+        System.out.println("用户登录code:"+code);
         String openId = weChatUtil.getOpenId(code);
         User user = userService.login(openId);
         Integer uid = user.getId();
