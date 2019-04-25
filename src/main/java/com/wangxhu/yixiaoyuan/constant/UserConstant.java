@@ -25,4 +25,8 @@ public class UserConstant {
     public static final String GET_ADDTESS_LIAT = "获取我的所有收获地址";
 
     public static final String NO_RECORD = "该用户还没有收货地址";
+
+    public static final String GET_USER_INFO = "获取用户信息";
+
+    public static final String USER_NOT_EXIST="用户未登录！";
 }

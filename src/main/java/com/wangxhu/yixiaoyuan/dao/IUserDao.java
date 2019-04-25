@@ -22,4 +22,12 @@ public interface IUserDao {
      * @return
      */
     User getUserByOpenId(@Param("openId") String openId);
+
+    /**
+     * 获取用户信息
+     * @param uid
+     * @return
+     */
+    User getUserInfo(@Param("uid") Integer uid);
+
 }

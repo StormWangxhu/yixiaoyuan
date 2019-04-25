@@ -12,7 +12,7 @@ import java.util.Date;
  * @Description: order订单模型类
  */
 
-@Entity
+//@Entity
 @Table(name = "order")
 public class Order {
 

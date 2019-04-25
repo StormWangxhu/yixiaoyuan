@@ -29,7 +29,7 @@ public class AddressServiceImpl implements IAddressService {
         address.setProvince(addressParam.getProvince());
         address.setDetailedAddress(addressParam.getDetailedAddress());
         address.setUid(loginUser.getId());
-        address.setDefault(addressParam.isDefault());
+        address.setIsDefault(addressParam.getIsDefault());
         addressDao.save(address);
         return true;
     }
@@ -44,12 +44,7 @@ public class AddressServiceImpl implements IAddressService {
      */
     @Override
     public List<Address> getAllGoodsAddress(Integer uid) {
-        List<Address> list = new ArrayList<>();
-        List<Integer> idList = addressDao.getIdsByUid(uid);
-        for (int i = 0; i < idList.size(); i++) {
-            Address address = addressDao.getAllGoodsAddress(i);
-            list.add(address);
-        }
+        List<Address> list = addressDao.getAllGoodsAddress(uid);
         return list;
     }
 }

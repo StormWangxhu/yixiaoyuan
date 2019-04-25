@@ -18,4 +18,11 @@ public interface IUserService {
      * @return
      */
     User login(String openId);
+
+    /**
+     * 获取用户信息
+     * @param uid
+     * @return
+     */
+    User getUserInfo(Integer uid);
 }

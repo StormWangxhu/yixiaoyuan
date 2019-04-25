@@ -40,10 +40,18 @@ public class Address {
     private String detailedAddress;
 
     /**
-     * 是否详细地址
+     * 是否默认地址
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private boolean isDefault = false;//默认不是
+    private int isDefault = 0;//默认不是  0
+
+    public int getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(int isDefault) {
+        this.isDefault = isDefault;
+    }
 
     public Integer getId() {
         return id;
@@ -77,11 +85,14 @@ public class Address {
         this.detailedAddress = detailedAddress;
     }
 
-    public boolean isDefault() {
-        return isDefault;
-    }
-
-    public void setDefault(boolean aDefault) {
-        isDefault = aDefault;
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", province='" + province + '\'' +
+                ", detailedAddress='" + detailedAddress + '\'' +
+                ", isDefault=" + isDefault +
+                '}';
     }
 }

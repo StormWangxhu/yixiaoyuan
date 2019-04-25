@@ -51,6 +51,13 @@ public class UserController {
     @Autowired
     private IAddressService addressService;
 
+    /**
+     * 用户登录
+     *
+     * @param code
+     * @return
+     * @throws Exception
+     */
     @ApiOperation(value = UserConstant.LOGIN_DESC, httpMethod = "POST")//协议描述
     @PostMapping("/login")
     public Result<TokenModel> login(@RequestBody String code) throws Exception {
@@ -99,4 +106,24 @@ public class UserController {
         }
         return ResultBuilder.success(addressList);
     }
+
+
+    /**
+     * 获取用户信息
+     *
+     * @param loginUser
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = UserConstant.GET_USER_INFO, httpMethod = "GET")
+    @GetMapping("/getInfo")
+    public Result<User> getUserInfo(@ApiIgnore @CurrentUser User loginUser) {
+        Integer uid = loginUser.getId();
+        User user = userService.getUserInfo(uid);
+        if (user == null) {
+            return ResultBuilder.fail(UserConstant.USER_NOT_EXIST);
+        }
+        return ResultBuilder.success(user);
+    }
+
 }

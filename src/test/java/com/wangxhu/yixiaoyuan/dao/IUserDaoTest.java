@@ -27,9 +27,17 @@ public class IUserDaoTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(IUserDaoTest.class);
 
     @Test
-    public void getUserByOpenId(){
-        String openId = "hello";
+    public void getUserByOpenId() {
+        String openId = "thisisOpenIdTest";
         User user = userDao.getUserByOpenId(openId);
-        LOGGER.info("测试结果为：{}",user);
+        LOGGER.warn("测试结果为:{}", user);
+    }
+
+
+    @Test
+    public void getUserInfoTest() {
+        Integer uid = 1;
+        User user = userDao.getUserInfo(uid);
+        LOGGER.warn("测试结果为:{}",user);
     }
 }
