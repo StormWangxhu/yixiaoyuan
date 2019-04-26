@@ -1,6 +1,7 @@
 package com.wangxhu.yixiaoyuan.dao;
 
 import com.wangxhu.yixiaoyuan.model.Goods;
+import io.swagger.models.auth.In;
 import javafx.scene.input.DataFormat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,5 +55,17 @@ public class IGoodsDaoTest {
         Integer uid = 3;
         List<Goods> list = goodsDao.getAllPublishGoods(uid);
         LOGGER.warn("测试结果:{}", list);
+    }
+
+    @Test
+    public void updatePageviewsTest() {
+        Integer uid = 3;
+        Integer gid = 2;
+        Goods goods = new Goods();
+        goods.setUid(uid);
+        goods.setId(gid);
+        goods.setPageviews(1000);
+        goodsDao.updatePageviews(goods);
+        LOGGER.warn("测试成功！");
     }
 }

@@ -45,4 +45,8 @@ public class GoodsConstant {
     public static final String GET_PUBLISH_GOODS_DESC = "我的发布";
 
     public static final String LIST_NULL = "列表为空！";
+
+    public static final String UPDATE_GOODS_PAGEVIEWS = "更新页面浏览量";
+
+    public static final String PAGEVIEWS_DESC = "页面浏览量";
 }

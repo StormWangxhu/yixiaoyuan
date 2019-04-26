@@ -73,4 +73,31 @@ public class GoodsController {
         }
         return ResultBuilder.success(list);
     }
+
+
+    /**
+     * 更新页面浏览量
+     *
+     * @param gid
+     * @param pageviews
+     * @param loginUser
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = GoodsConstant.UPDATE_GOODS_PAGEVIEWS, httpMethod = "PUT")
+    @ApiImplicitParams({@ApiImplicitParam(name = "pageviews", value = GoodsConstant.PAGEVIEWS_DESC, required = true
+            , paramType = "path")
+            , @ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true
+            , paramType = "header")})
+    @PutMapping("/update/pageviews/{gid}/{pageviews}")
+    public Result<Object> updatePageViews(@PathVariable("gid") Integer gid,
+                                          @PathVariable("pageviews") Integer pageviews,
+                                          @ApiIgnore @CurrentUser User loginUser) {
+        Integer uid = loginUser.getId();
+        boolean result = goodService.updatePageviews(uid, gid, pageviews);
+        if (result) {
+            return ResultBuilder.success();
+        }
+        return ResultBuilder.fail();
+    }
 }

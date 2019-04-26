@@ -28,4 +28,14 @@ public interface IGoodService {
      * @return
      */
     List<Goods> getAllPublishGoods(User loginUser);
+
+    /**
+     * 修改用户商品浏览量
+     *
+     * @param uid
+     * @param pageviews
+     * @return
+     */
+    boolean updatePageviews(Integer uid, Integer gid, Integer pageviews);
+
 }

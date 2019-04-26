@@ -27,8 +27,16 @@ public interface IGoodsDao {
 
     /**
      * 获取我的所有发布
+     *
      * @param uid
      * @return
      */
     List<Goods> getAllPublishGoods(@Param("uid") Integer uid);
+
+    /**
+     * 更新一个用户特定商品的页面浏览量
+     *
+     * @param goods
+     */
+    void updatePageviews(@Param("goods") Goods goods);
 }

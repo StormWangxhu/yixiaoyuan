@@ -62,4 +62,22 @@ public class GoodsServiceImpl implements IGoodService {
         }
         return list;
     }
+
+    /**
+     * 更新页面浏览量
+     *
+     * @param uid
+     * @param gid
+     * @param pageviews
+     * @return
+     */
+    @Override
+    public boolean updatePageviews(Integer uid, Integer gid, Integer pageviews) {
+        Goods goods = new Goods();
+        goods.setId(gid);
+        goods.setPageviews(pageviews);
+        goods.setUid(uid);
+        goodsDao.updatePageviews(goods);
+        return true;
+    }
 }
