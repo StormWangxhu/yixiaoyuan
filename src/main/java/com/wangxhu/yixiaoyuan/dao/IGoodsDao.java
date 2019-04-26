@@ -2,6 +2,7 @@ package com.wangxhu.yixiaoyuan.dao;
 
 import com.wangxhu.yixiaoyuan.model.Goods;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,5 +21,5 @@ public interface IGoodsDao {
      *
      * @param goods
      */
-    void save(Goods goods);
+    void save(@Param("goods") Goods goods);
 }
