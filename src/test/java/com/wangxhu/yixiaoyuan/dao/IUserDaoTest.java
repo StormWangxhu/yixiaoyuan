@@ -38,6 +38,21 @@ public class IUserDaoTest {
     public void getUserInfoTest() {
         Integer uid = 1;
         User user = userDao.getUserInfo(uid);
-        LOGGER.warn("测试结果为:{}",user);
+        LOGGER.warn("测试结果为:{}", user);
+    }
+
+    @Test
+    public void updateTest() {
+        Integer uid = 2;
+        User user = new User();
+        user.setQq("2690582171");
+        user.setNickname("哦吼");
+        user.setGender(1);
+        user.setAddressNow("陕西省西安市西安电子科技大学南校区");
+        user.setPhone("15664765950");
+        user.setUsername("王小虎");
+        user.setAvatar("avatarTest");
+        userDao.update(user, 2);
+        LOGGER.warn("测试成功！");
     }
 }

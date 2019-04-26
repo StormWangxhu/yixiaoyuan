@@ -48,4 +48,23 @@ public class UserServiceImpl implements IUserService {
         User user = userDao.getUserInfo(uid);
         return user;
     }
+
+    /**
+     * 更新用户信息
+     *
+     * @param paramUser
+     */
+    @Override
+    public void updateUserInfo(User loginUser, User paramUser) {
+        Integer uid = loginUser.getId();
+        User user = new User();
+        user.setUsername(paramUser.getUsername());
+        user.setAddressNow(paramUser.getAddressNow());
+        user.setAvatar(paramUser.getAvatar());
+        user.setGender(paramUser.getGender());
+        user.setNickname(paramUser.getNickname());
+        user.setQq(paramUser.getQq());
+        user.setPhone(paramUser.getPhone());
+        userDao.update(user, uid);
+    }
 }

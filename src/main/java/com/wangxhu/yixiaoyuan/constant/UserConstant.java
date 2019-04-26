@@ -28,5 +28,9 @@ public class UserConstant {
 
     public static final String GET_USER_INFO = "获取用户信息";
 
-    public static final String USER_NOT_EXIST="用户未登录！";
+    public static final String USER_NOT_EXIST = "用户未登录！";
+
+    public static final String UPDATE_USER_INFO = "更新用户信息";
+
+    public static final String AUTHORIZATION_TOKEN = "授权码(格式: uid_token)";
 }

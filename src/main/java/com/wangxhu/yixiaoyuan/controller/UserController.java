@@ -74,6 +74,21 @@ public class UserController {
 
 
     /**
+     * 更新用户信息
+     *
+     * @param paramUser
+     * @return
+     */
+    @Authorization
+    @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
+    @ApiOperation(value = UserConstant.UPDATE_USER_INFO, httpMethod = "PUT")
+    @PutMapping("/update/userInfo")
+    public Result<Object> updateUserInfo(@RequestBody User paramUser, @ApiIgnore @CurrentUser User loginUser) {
+        userService.updateUserInfo(loginUser,paramUser);
+        return ResultBuilder.success();
+    }
+
+    /**
      * 保存用户新增的收获地址
      *
      * @param addressParam
@@ -82,6 +97,7 @@ public class UserController {
      */
     @Authorization//自定义注解，在拦截器中检查token中需要用到。每个方法都需要加这个注解进行权限的验证
     @ApiOperation(value = UserConstant.INSERT_NEW_GOODS_ADDRESS, httpMethod = "PUT")
+    @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
     @PutMapping("/addAddress")
     public Result<Object> saveGoodsAddress(@RequestBody Address addressParam, @ApiIgnore @CurrentUser User loginUser) {
         boolean result = addressService.insertAddress(loginUser, addressParam);
@@ -97,6 +113,7 @@ public class UserController {
      */
     @Authorization
     @ApiOperation(value = UserConstant.GET_ADDTESS_LIAT, httpMethod = "GET")
+    @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
     @GetMapping("/getAllGoodsAddress")
     public Result<List<Address>> getAllGoodsAddress(@ApiIgnore @CurrentUser User loginUser) {
         Integer uid = loginUser.getId();
@@ -116,6 +133,7 @@ public class UserController {
      */
     @Authorization
     @ApiOperation(value = UserConstant.GET_USER_INFO, httpMethod = "GET")
+    @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
     @GetMapping("/getInfo")
     public Result<User> getUserInfo(@ApiIgnore @CurrentUser User loginUser) {
         Integer uid = loginUser.getId();

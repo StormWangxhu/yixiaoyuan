@@ -18,6 +18,7 @@ public interface IUserDao {
 
     /**
      * 根据openId查询用户
+     *
      * @param openId
      * @return
      */
@@ -25,9 +26,18 @@ public interface IUserDao {
 
     /**
      * 获取用户信息
+     *
      * @param uid
      * @return
      */
     User getUserInfo(@Param("uid") Integer uid);
+
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     * @param id
+     */
+    void update(@Param("user") User user, @Param("id") Integer id);
 
 }

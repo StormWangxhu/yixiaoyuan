@@ -41,7 +41,7 @@ public class IAddressDaoTest {
     @Test
     public void saveTest(){
         Address address = new Address();
-        address.setUid(2);
+        address.setUid(3);
         address.setProvince("宁夏回族自治区");
         address.setDetailedAddress("吴忠市红寺堡开发区");
         address.setIsDefault(1);
