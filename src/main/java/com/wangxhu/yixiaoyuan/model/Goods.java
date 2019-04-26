@@ -62,6 +62,20 @@ public class Goods {
      */
     private String publishTime;
 
+    /**
+     * 卖出时间
+     */
+    private String sellTime;
+
+
+    public String getSellTime() {
+        return sellTime;
+    }
+
+    public void setSellTime(String sellTime) {
+        this.sellTime = sellTime;
+    }
+
     public String getPublishTime() {
         return publishTime;
     }
@@ -146,6 +160,7 @@ public class Goods {
                 ", pageviews=" + pageviews +
                 ", isSelled=" + isSelled +
                 ", publishTime='" + publishTime + '\'' +
+                ", sellTime='" + sellTime + '\'' +
                 '}';
     }
 }
