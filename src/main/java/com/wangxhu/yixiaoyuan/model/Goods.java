@@ -60,13 +60,13 @@ public class Goods {
     /**
      * 发布时间
      */
-    private Date publishTime ;
+    private String publishTime ;
 
-    public Date getPublishTime() {
+    public String getPublishTime() {
         return publishTime;
     }
 
-    public void setPublishTime(Date publishTime) {
+    public void setPublishTime(String publishTime) {
         this.publishTime = publishTime;
     }
 
