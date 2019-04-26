@@ -32,7 +32,7 @@ import java.util.List;
  */
 
 
-@Api(value = "api/user", description = UserConstant.CONTROLLER_DESC)//协议集描述
+@Api(value = "api/user", description = UserConstant.USER_CONTROLLER_DESC)//协议集描述
 @RequestMapping("api/user")
 @RestController
 public class UserController {

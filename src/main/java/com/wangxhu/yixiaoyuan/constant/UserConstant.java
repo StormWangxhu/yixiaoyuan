@@ -8,7 +8,7 @@ package com.wangxhu.yixiaoyuan.constant;
  */
 public class UserConstant {
 
-    public static final String CONTROLLER_DESC = "处理用户相关的数据请求";
+    public static final String USER_CONTROLLER_DESC = "处理用户相关的数据请求";
 
     public static final String LOGIN_DESC = "用户登录";
 
