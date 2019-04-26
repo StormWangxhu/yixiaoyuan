@@ -3,18 +3,21 @@ package com.wangxhu.yixiaoyuan.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * @Author: StormWangxhu
- * @Time: 2019-04-24 13:13
+ * @Time: 2019-04-26 19:30
  * @Email: StormWangxhu@163.com
- * @Description: order订单模型类
+ * @Description: 订单模型类order
  */
 
-//@Entity
-@Table(name = "order")
-public class Order {
+
+/**
+ * 错误记录，这个表一直报DDL错误，原因是表名order与mysql内部关键字可能冲突，改为orders
+ */
+@Entity
+@Table(name = "orders")
+public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,34 +27,35 @@ public class Order {
     /**
      * 用户id
      */
-    @Column(nullable = false)
     private Integer uid;
 
     /**
      * 商品id
      */
-    @Column(nullable = false)//nullable 的意思是可空
     private Integer gid;
 
     /**
      * 订单创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
-     * 订单付款时间
+     * 付款时间
      */
-    private Date payTime;
+    private String payTime;
 
     /**
      * 订单编号
      */
-    private Long number;
+    private String orderNum;
 
     /**
-     * 订单是否完成，默认无
+     * 订单状态
+     * 0-未完成
+     * 1-完成
      */
-    private boolean isFinished = false;
+    private Integer status;
+
 
     public Integer getId() {
         return id;
@@ -77,48 +81,48 @@ public class Order {
         this.gid = gid;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getPayTime() {
+    public String getPayTime() {
         return payTime;
     }
 
-    public void setPayTime(Date payTime) {
+    public void setPayTime(String payTime) {
         this.payTime = payTime;
     }
 
-    public Long getNumber() {
-        return number;
+    public String getOrderNum() {
+        return orderNum;
     }
 
-    public void setNumber(Long number) {
-        this.number = number;
+    public void setOrderNum(String orderNum) {
+        this.orderNum = orderNum;
     }
 
-    public boolean isFinished() {
-        return isFinished;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setFinished(boolean finished) {
-        isFinished = finished;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Orders{" +
                 "id=" + id +
                 ", uid=" + uid +
                 ", gid=" + gid +
-                ", createTime=" + createTime +
-                ", payTime=" + payTime +
-                ", number=" + number +
-                ", isFinished=" + isFinished +
+                ", createTime='" + createTime + '\'' +
+                ", payTime='" + payTime + '\'' +
+                ", orderNum='" + orderNum + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
