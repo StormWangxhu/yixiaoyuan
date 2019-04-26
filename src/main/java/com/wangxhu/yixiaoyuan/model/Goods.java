@@ -3,6 +3,7 @@ package com.wangxhu.yixiaoyuan.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @Author: StormWangxhu
@@ -55,6 +56,19 @@ public class Goods {
      * 商品是否已经出售
      */
     private boolean isSelled = false;//默认无
+
+    /**
+     * 发布时间
+     */
+    private Date publishTime ;
+
+    public Date getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(Date publishTime) {
+        this.publishTime = publishTime;
+    }
 
     public Integer getId() {
         return id;
@@ -131,6 +145,7 @@ public class Goods {
                 ", category=" + category +
                 ", pageviews=" + pageviews +
                 ", isSelled=" + isSelled +
+                ", publishTime=" + publishTime +
                 '}';
     }
 }
