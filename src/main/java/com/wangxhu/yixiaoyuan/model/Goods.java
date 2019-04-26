@@ -50,7 +50,7 @@ public class Goods {
     /**
      * 商品浏览量
      */
-    private Integer pageviews = 0;
+    private Integer pageviews = 1;
 
     /**
      * 商品是否已经出售
@@ -65,6 +65,7 @@ public class Goods {
     /**
      * 卖出时间
      */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)////将该标记放在属性上，如果该属性为NULL则不参与序列化
     private String sellTime;
 
 
