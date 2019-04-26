@@ -61,7 +61,7 @@ public class UserController {
     @ApiOperation(value = UserConstant.LOGIN_DESC, httpMethod = "POST")//协议描述
     @PostMapping("/login")
     public Result<TokenModel> login(@RequestBody String code) throws Exception {
-        LOGGER.info("用户登录code：{}", code);
+        LOGGER.warn("用户登录code：{}", code);
         System.out.println("用户登录code:" + code);
         String openId = weChatUtil.getOpenId(code);
         User user = userService.login(openId);
@@ -84,7 +84,8 @@ public class UserController {
     @ApiOperation(value = UserConstant.UPDATE_USER_INFO, httpMethod = "PUT")
     @PutMapping("/update/userInfo")
     public Result<Object> updateUserInfo(@RequestBody User paramUser, @ApiIgnore @CurrentUser User loginUser) {
-        userService.updateUserInfo(loginUser,paramUser);
+        LOGGER.warn("更新用户信息：{}", paramUser);
+        userService.updateUserInfo(loginUser, paramUser);
         return ResultBuilder.success();
     }
 
@@ -100,6 +101,7 @@ public class UserController {
     @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
     @PutMapping("/addAddress")
     public Result<Object> saveGoodsAddress(@RequestBody Address addressParam, @ApiIgnore @CurrentUser User loginUser) {
+        LOGGER.warn("保存用户新增的收获地址：{}", addressParam);
         boolean result = addressService.insertAddress(loginUser, addressParam);
         return ResultBuilder.success();
     }
@@ -116,6 +118,7 @@ public class UserController {
     @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
     @GetMapping("/getAllGoodsAddress")
     public Result<List<Address>> getAllGoodsAddress(@ApiIgnore @CurrentUser User loginUser) {
+        LOGGER.warn("获取用户所有的收获地址:");
         Integer uid = loginUser.getId();
         List<Address> addressList = addressService.getAllGoodsAddress(uid);
         if (addressList.size() == 0 || addressList == null) {
@@ -136,6 +139,7 @@ public class UserController {
     @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
     @GetMapping("/getInfo")
     public Result<User> getUserInfo(@ApiIgnore @CurrentUser User loginUser) {
+        LOGGER.warn("获取用户信息:");
         Integer uid = loginUser.getId();
         User user = userService.getUserInfo(uid);
         if (user == null) {
