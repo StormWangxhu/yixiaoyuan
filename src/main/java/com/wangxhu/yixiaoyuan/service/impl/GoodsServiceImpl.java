@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: StormWangxhu
@@ -43,5 +44,22 @@ public class GoodsServiceImpl implements IGoodService {
         goods.setUid(uid);
         goods.setPublishTime(ft.format(new Date()));
         goodsDao.save(goods);
+    }
+
+
+    /**
+     * 获取我的所有发布
+     *
+     * @param loginUser
+     * @return
+     */
+    @Override
+    public List<Goods> getAllPublishGoods(User loginUser) {
+        Integer uid = loginUser.getId();
+        List<Goods> list = goodsDao.getAllPublishGoods(uid);
+        if (list == null || list.size() == 0) {
+            return null;
+        }
+        return list;
     }
 }

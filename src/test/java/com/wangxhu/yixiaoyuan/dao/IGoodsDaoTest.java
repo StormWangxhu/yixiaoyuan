@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: StormWangxhu
@@ -36,14 +37,22 @@ public class IGoodsDaoTest {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Goods goods = new Goods();
         goods.setUid(3);
-        goods.setPageviews(20);
+        goods.setPageviews(21);
         goods.setPrice(200);
-        goods.setDescription("我的电脑最牛逼");
-        goods.setCategory(0);
-        goods.setAvatar("avatarTest");
+        goods.setDescription("黄河之水天上来，奔流到海不复回！");
+        goods.setCategory(1);
+        goods.setAvatar("avatarTest1");
         goods.setPublishTime(ft.format(new Date()));
-        goods.setIsSelled(0);
+        goods.setIsSelled(1);
         goodsDao.save(goods);
         LOGGER.warn("测试成功！");
+    }
+
+
+    @Test
+    public void getAllPublishGoodsTest() {
+        Integer uid = 3;
+        List<Goods> list = goodsDao.getAllPublishGoods(uid);
+        LOGGER.warn("测试结果:{}", list);
     }
 }

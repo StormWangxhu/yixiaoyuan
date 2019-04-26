@@ -12,14 +12,14 @@ import com.wangxhu.yixiaoyuan.utils.result.ResultBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 /**
  * @Author: StormWangxhu
@@ -47,10 +47,30 @@ public class GoodsController {
      * @return
      */
     @Authorization
+    @ApiOperation(value = GoodsConstant.PUBLISH_CONTROLLER_DESC, httpMethod = "PUT")
     @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
     @PutMapping("/publish")
     public Result<Object> publishGoods(@ApiIgnore @CurrentUser User loginUser, @RequestBody Goods goods) {
         goodService.save(loginUser, goods);
         return ResultBuilder.success();
+    }
+
+
+    /**
+     * 获取当前用户的所有的发布，即我的发布
+     *
+     * @param loginUser
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = GoodsConstant.GET_PUBLISH_GOODS_DESC, httpMethod = "GET")
+    @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
+    @GetMapping("/getPublish")
+    public Result<List<Goods>> getAllPublishGoodsInfo(@ApiIgnore @CurrentUser User loginUser) {
+        List<Goods> list = goodService.getAllPublishGoods(loginUser);
+        if (list == null || list.size() == 0) {
+            return ResultBuilder.fail(GoodsConstant.LIST_NULL);
+        }
+        return ResultBuilder.success(list);
     }
 }

@@ -39,4 +39,10 @@ public class GoodsConstant {
      * 其他
      */
     public static final int GOODS_OTHERS = 5;
+
+    public static final String PUBLISH_CONTROLLER_DESC = "发布商品信息";
+
+    public static final String GET_PUBLISH_GOODS_DESC = "我的发布";
+
+    public static final String LIST_NULL = "列表为空！";
 }
