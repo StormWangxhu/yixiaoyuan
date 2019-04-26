@@ -50,17 +50,17 @@ public class Goods {
     /**
      * 商品浏览量
      */
-    private Long pageviews;
+    private Integer pageviews = 0;
 
     /**
      * 商品是否已经出售
      */
-    private boolean isSelled = false;//默认无
+    private int isSelled = 0;//默认无0
 
     /**
      * 发布时间
      */
-    private String publishTime ;
+    private String publishTime;
 
     public String getPublishTime() {
         return publishTime;
@@ -118,20 +118,20 @@ public class Goods {
         this.category = category;
     }
 
-    public Long getPageviews() {
+    public Integer getPageviews() {
         return pageviews;
     }
 
-    public void setPageviews(Long pageviews) {
+    public void setPageviews(Integer pageviews) {
         this.pageviews = pageviews;
     }
 
-    public boolean isSelled() {
+    public int getIsSelled() {
         return isSelled;
     }
 
-    public void setSelled(boolean selled) {
-        isSelled = selled;
+    public void setIsSelled(int isSelled) {
+        this.isSelled = isSelled;
     }
 
     @Override
@@ -145,7 +145,7 @@ public class Goods {
                 ", category=" + category +
                 ", pageviews=" + pageviews +
                 ", isSelled=" + isSelled +
-                ", publishTime=" + publishTime +
+                ", publishTime='" + publishTime + '\'' +
                 '}';
     }
 }
