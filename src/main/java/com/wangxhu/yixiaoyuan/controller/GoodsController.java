@@ -39,6 +39,13 @@ public class GoodsController {
     private IGoodService goodService;
 
 
+    /**
+     * 发布商品讯息
+     *
+     * @param loginUser
+     * @param goods
+     * @return
+     */
     @Authorization
     @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
     @PutMapping("/publish")

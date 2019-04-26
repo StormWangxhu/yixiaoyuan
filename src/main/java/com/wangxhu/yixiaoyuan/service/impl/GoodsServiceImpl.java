@@ -7,6 +7,9 @@ import com.wangxhu.yixiaoyuan.service.IGoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @Author: StormWangxhu
  * @Time: 2019-04-26 16:13
@@ -28,6 +31,7 @@ public class GoodsServiceImpl implements IGoodService {
      */
     @Override
     public void save(User loginUser, Goods paramGoods) {
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Integer uid = loginUser.getId();
         Goods goods = new Goods();
         goods.setAvatar(paramGoods.getAvatar());
@@ -35,8 +39,9 @@ public class GoodsServiceImpl implements IGoodService {
         goods.setDescription(paramGoods.getDescription());
         goods.setPrice(paramGoods.getPrice());
         goods.setPageviews(paramGoods.getPageviews());
-        goods.setSelled(paramGoods.isSelled());
+        goods.setIsSelled(paramGoods.getIsSelled());
         goods.setUid(uid);
+        goods.setPublishTime(ft.format(new Date()));
         goodsDao.save(goods);
     }
 }
