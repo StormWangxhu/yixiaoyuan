@@ -35,6 +35,21 @@ public class Collects {
      */
     private Integer gid;
 
+    /**
+     * 收藏状态  0-已收藏，1-取消收藏
+     */
+    @Column(nullable = false)
+    private Integer state = 0;
+
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
     public Integer getId() {
         return id;
     }

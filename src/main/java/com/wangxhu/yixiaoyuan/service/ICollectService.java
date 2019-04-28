@@ -20,4 +20,12 @@ public interface ICollectService {
      */
     Map<String, String> insertCollects(Integer uid, Integer uid_other, Integer gid);
 
+    /**
+     * 取消收藏
+     *
+     * @param uid
+     * @param gid
+     * @return
+     */
+    Map<String,String> cancelCollect(Integer uid, Integer gid);
 }

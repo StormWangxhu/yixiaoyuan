@@ -139,4 +139,21 @@ public class GoodsController {
         }
         return ResultBuilder.fail(datas.get(CommonConstant.FAIL));
     }
+
+    @Authorization
+    @ApiOperation(value = CommonConstant.CANCEL_COLLECT, httpMethod = "PUT")
+    @ApiImplicitParams({@ApiImplicitParam(name = "gid", value = CollectConstant.GID, required = true
+            , paramType = "path"),
+            @ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
+    @PutMapping("/update/cancelCollect/{gid}")
+    public Result<Object> cancelCollect(@ApiIgnore @CurrentUser User loginUser, @PathVariable("gid") Integer gid) {
+        LOGGER.warn("用户取消我的收藏:{}", "gid: " + gid);
+        Integer uid = loginUser.getId();
+        Map<String, String> datas = collectService.cancelCollect(uid, gid);
+        if (!ObjectUtil.isEmpty(datas.get(CommonConstant.FAIL))) {
+            return ResultBuilder.fail(datas.get(CommonConstant.FAIL));
+        } else {
+            return ResultBuilder.success();
+        }
+    }
 }

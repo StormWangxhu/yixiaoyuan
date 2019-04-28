@@ -11,4 +11,6 @@ public class DBConstant {
     public static final int HAVE_THIS_RECORD = 1;
 
     public static final String HAVE_ALREADY_EXIST = "该商品已经收藏";
+
+    public static final Integer NOT_HAVE_THIS_RECORD = 0;
 }

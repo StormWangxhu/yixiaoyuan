@@ -41,4 +41,21 @@ public class ICollectsDaoTest {
         collectDao.insertCollects(uidMy, uidOther, gid);
         LOGGER.warn("测试成功！");
     }
+
+    @Test
+    public void isExistThisGoods2Test() {
+        Integer uid_my = 2;
+        Integer gid = 3;
+        Integer count = collectDao.isExistThisGoods2(uid_my, gid);
+        LOGGER.warn("测试结果:{}", count);
+    }
+
+    @Test
+    public void updateCollectStateTest() {
+        Integer uid_my = 2;
+        Integer gid = 3;
+        collectDao.updateCollectState(uid_my, gid);
+        LOGGER.warn("测试成功！");
+    }
+
 }

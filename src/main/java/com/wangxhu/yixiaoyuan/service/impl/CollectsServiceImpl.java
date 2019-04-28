@@ -1,5 +1,6 @@
 package com.wangxhu.yixiaoyuan.service.impl;
 
+import com.wangxhu.yixiaoyuan.constant.CollectConstant;
 import com.wangxhu.yixiaoyuan.constant.CommonConstant;
 import com.wangxhu.yixiaoyuan.constant.DBConstant;
 import com.wangxhu.yixiaoyuan.dao.ICollectDao;
@@ -41,6 +42,26 @@ public class CollectsServiceImpl implements ICollectService {
             return datas;
         }
         collectDao.insertCollects(uid, uid_other, gid);
+        datas.put(CommonConstant.SUCCESS, CommonConstant.SUCCESS);
+        return datas;
+    }
+
+    /**
+     * 取消我的收藏
+     *
+     * @param uid
+     * @param gid
+     * @return
+     */
+    @Override
+    public Map<String, String> cancelCollect(Integer uid, Integer gid) {
+        Map<String, String> datas = new HashMap<>();
+        Integer count = collectDao.isExistThisGoods2(uid, gid);
+        if (count == DBConstant.NOT_HAVE_THIS_RECORD) {
+            datas.put(CommonConstant.FAIL, CollectConstant.NOT_HAVE_THIS_RECORD);
+            return datas;
+        }
+        collectDao.updateCollectState(uid, gid);
         datas.put(CommonConstant.SUCCESS, CommonConstant.SUCCESS);
         return datas;
     }

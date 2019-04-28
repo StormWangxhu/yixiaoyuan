@@ -33,4 +33,21 @@ public interface ICollectDao {
      * @param gid
      */
     void insertCollects(@Param("uid_my") Integer uid, @Param("uid_other") Integer uid_other, @Param("gid") Integer gid);
+
+    /**
+     * 判断该商品是否已加入我的收藏
+     *
+     * @param uid
+     * @param gid
+     * @return
+     */
+    Integer isExistThisGoods2(@Param("uid_my") Integer uid, @Param("gid") Integer gid);
+
+    /**
+     * 取消我的收藏
+     *
+     * @param uid
+     * @param gid
+     */
+    void updateCollectState(@Param("uid_my") Integer uid, @Param("gid") Integer gid);
 }
