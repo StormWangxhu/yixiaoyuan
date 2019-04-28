@@ -8,7 +8,7 @@ package com.wangxhu.yixiaoyuan.constant;
  */
 public class GoodsConstant {
 
-    public static final String GOODS_CONTROLLER_DESC = "处理商品相关的数据畜力请求";
+    public static final String GOODS_CONTROLLER_DESC = "处理商品相关的数据请求";
 
     /**
      * 分类状态码 数码
