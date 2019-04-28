@@ -140,6 +140,14 @@ public class GoodsController {
         return ResultBuilder.fail(datas.get(CommonConstant.FAIL));
     }
 
+
+    /**
+     * 用户取消我的收藏里某件商品
+     *
+     * @param loginUser
+     * @param gid
+     * @return
+     */
     @Authorization
     @ApiOperation(value = CommonConstant.CANCEL_COLLECT, httpMethod = "PUT")
     @ApiImplicitParams({@ApiImplicitParam(name = "gid", value = CollectConstant.GID, required = true
