@@ -1,8 +1,11 @@
 package com.wangxhu.yixiaoyuan.dao;
 
+import com.wangxhu.yixiaoyuan.model.Collects;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @Author: StormWangxhu
@@ -50,4 +53,12 @@ public interface ICollectDao {
      * @param gid
      */
     void updateCollectState(@Param("uid_my") Integer uid, @Param("gid") Integer gid);
+
+    /**
+     * 获取我的所有收藏商品
+     *
+     * @param uid
+     * @return
+     */
+    List<Collects> getAllMyCollectsId(@Param("uid_my") Integer uid);
 }

@@ -1,5 +1,8 @@
 package com.wangxhu.yixiaoyuan.service;
 
+import com.wangxhu.yixiaoyuan.model.Goods;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,5 +30,13 @@ public interface ICollectService {
      * @param gid
      * @return
      */
-    Map<String,String> cancelCollect(Integer uid, Integer gid);
+    Map<String, String> cancelCollect(Integer uid, Integer gid);
+
+    /**
+     * 获取我的所有收藏
+     *
+     * @param uid
+     * @return
+     */
+    List<Goods> getAllMyCollects(Integer uid);
 }

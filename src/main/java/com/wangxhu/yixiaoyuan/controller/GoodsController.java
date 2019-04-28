@@ -156,4 +156,22 @@ public class GoodsController {
             return ResultBuilder.success();
         }
     }
+
+
+    /**
+     * 获取我的所有收藏商品
+     *
+     * @param loginUser
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = CommonConstant.GET_ALL_MY_COLLECTS, httpMethod = "GET")
+    @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
+    @GetMapping("/get/myCollects")
+    public Result<List<Goods>> getAllMyCollects(@ApiIgnore @CurrentUser User loginUser) {
+        LOGGER.warn("获取我的收藏");
+        Integer uid = loginUser.getId();
+        List<Goods> list = collectService.getAllMyCollects(uid);
+        return ResultBuilder.success(list);
+    }
 }

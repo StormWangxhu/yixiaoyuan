@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -67,5 +68,15 @@ public class IGoodsDaoTest {
         goods.setPageviews(1000);
         goodsDao.updatePageviews(goods);
         LOGGER.warn("测试成功！");
+    }
+
+    @Test
+    public void getAllMyCollectGoodsTest() {
+        Integer uid = 3;
+        List<Integer> idList = new ArrayList<>();
+        idList.add(1);
+        idList.add(2);
+        List<Goods> goodsList = goodsDao.getAllMyCollectGoods(idList, uid);
+        LOGGER.warn("测试结果：{}", goodsList);
     }
 }

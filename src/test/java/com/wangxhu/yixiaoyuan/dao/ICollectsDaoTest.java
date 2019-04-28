@@ -1,5 +1,7 @@
 package com.wangxhu.yixiaoyuan.dao;
 
+import com.wangxhu.yixiaoyuan.model.Collects;
+import io.swagger.models.auth.In;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -7,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @Author: StormWangxhu
@@ -58,4 +62,11 @@ public class ICollectsDaoTest {
         LOGGER.warn("测试成功！");
     }
 
+    @Test
+    public void getAllMyCollectsIdTest() {
+        Integer uid_my = 3;
+        List<Collects> idLists = collectDao.getAllMyCollectsId(uid_my);
+        LOGGER.warn("测试结果:{}", idLists);
+
+    }
 }

@@ -17,7 +17,9 @@ public class CommonConstant {
     public static final String SUCCESS = "成功！";
 
     /**
-     * 即在后太将状态设置一下
+     * 即在后台将状态设置一下
      */
     public static final String CANCEL_COLLECT = "取消收藏";
+
+    public static final String GET_ALL_MY_COLLECTS = "获取我的收藏";
 }

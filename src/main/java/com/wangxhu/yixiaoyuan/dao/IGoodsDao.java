@@ -39,4 +39,13 @@ public interface IGoodsDao {
      * @param goods
      */
     void updatePageviews(@Param("goods") Goods goods);
+
+    /**
+     * 获取我的收藏
+     *
+     * @param iddLists
+     * @param uid
+     * @return
+     */
+    List<Goods> getAllMyCollectGoods(@Param("list") List<Integer> iddLists, @Param("uid") Integer uid);
 }

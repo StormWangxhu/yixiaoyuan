@@ -4,11 +4,16 @@ import com.wangxhu.yixiaoyuan.constant.CollectConstant;
 import com.wangxhu.yixiaoyuan.constant.CommonConstant;
 import com.wangxhu.yixiaoyuan.constant.DBConstant;
 import com.wangxhu.yixiaoyuan.dao.ICollectDao;
+import com.wangxhu.yixiaoyuan.dao.IGoodsDao;
+import com.wangxhu.yixiaoyuan.model.Collects;
+import com.wangxhu.yixiaoyuan.model.Goods;
 import com.wangxhu.yixiaoyuan.service.ICollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +28,9 @@ public class CollectsServiceImpl implements ICollectService {
 
     @Autowired
     private ICollectDao collectDao;
+
+    @Autowired
+    private IGoodsDao goodsDao;
 
     /**
      * 添加我的收藏
@@ -64,5 +72,26 @@ public class CollectsServiceImpl implements ICollectService {
         collectDao.updateCollectState(uid, gid);
         datas.put(CommonConstant.SUCCESS, CommonConstant.SUCCESS);
         return datas;
+    }
+
+    /**
+     * 获取我的所有收藏
+     *
+     * @param uid
+     * @return
+     */
+    @Override
+    public List<Goods> getAllMyCollects(Integer uid) {
+        List<Goods> goodsList = new ArrayList<>();
+        List<Integer> iddLists = new ArrayList<>();
+        List<Collects> lists = collectDao.getAllMyCollectsId(uid);
+        if (lists == null || lists.size() == 0) {//没有收藏
+            return goodsList;
+        }
+        for (int i = 0; i < lists.size(); i++) {
+            iddLists.add(lists.get(i).getId());
+        }
+        goodsList = goodsDao.getAllMyCollectGoods(iddLists, uid);
+        return goodsList;
     }
 }
