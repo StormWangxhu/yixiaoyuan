@@ -49,4 +49,8 @@ public class GoodsConstant {
     public static final String UPDATE_GOODS_PAGEVIEWS = "更新页面浏览量";
 
     public static final String PAGEVIEWS_DESC = "页面浏览量";
+
+    public static final String GID = "商品id";
+
+    public static final String ADD_USER_COLLECTIONS = "添加我的收藏";
 }

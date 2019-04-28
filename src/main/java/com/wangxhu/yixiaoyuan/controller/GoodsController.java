@@ -2,11 +2,15 @@ package com.wangxhu.yixiaoyuan.controller;
 
 import com.wangxhu.yixiaoyuan.annotation.Authorization;
 import com.wangxhu.yixiaoyuan.annotation.CurrentUser;
+import com.wangxhu.yixiaoyuan.constant.CollectConstant;
+import com.wangxhu.yixiaoyuan.constant.CommonConstant;
 import com.wangxhu.yixiaoyuan.constant.GoodsConstant;
 import com.wangxhu.yixiaoyuan.constant.UserConstant;
 import com.wangxhu.yixiaoyuan.model.Goods;
 import com.wangxhu.yixiaoyuan.model.User;
+import com.wangxhu.yixiaoyuan.service.ICollectService;
 import com.wangxhu.yixiaoyuan.service.IGoodService;
+import com.wangxhu.yixiaoyuan.utils.common.ObjectUtil;
 import com.wangxhu.yixiaoyuan.utils.result.Result;
 import com.wangxhu.yixiaoyuan.utils.result.ResultBuilder;
 import io.swagger.annotations.Api;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: StormWangxhu
@@ -37,6 +42,9 @@ public class GoodsController {
 
     @Autowired
     private IGoodService goodService;
+
+    @Autowired
+    private ICollectService collectService;
 
 
     /**
@@ -85,7 +93,9 @@ public class GoodsController {
      */
     @Authorization
     @ApiOperation(value = GoodsConstant.UPDATE_GOODS_PAGEVIEWS, httpMethod = "PUT")
-    @ApiImplicitParams({@ApiImplicitParam(name = "pageviews", value = GoodsConstant.PAGEVIEWS_DESC, required = true
+    @ApiImplicitParams({@ApiImplicitParam(name = "gid", value = GoodsConstant.GID, required = true
+            , paramType = "path")
+            , @ApiImplicitParam(name = "pageviews", value = GoodsConstant.PAGEVIEWS_DESC, required = true
             , paramType = "path")
             , @ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true
             , paramType = "header")})
@@ -99,5 +109,34 @@ public class GoodsController {
             return ResultBuilder.success();
         }
         return ResultBuilder.fail();
+    }
+
+
+    /**
+     * 用户添加我的收藏
+     *
+     * @param loginUser
+     * @param uid_other
+     * @param gid
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = GoodsConstant.ADD_USER_COLLECTIONS, httpMethod = "PUT")
+    @ApiImplicitParams({@ApiImplicitParam(name = "uid_other", value = CollectConstant.UID_OTHER, required = true
+            , paramType = "path")
+            , @ApiImplicitParam(name = "gid", value = CollectConstant.GID, required = true
+            , paramType = "path")
+            , @ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true
+            , paramType = "header")})
+    @PutMapping("/insert/myCollects/{uid_other}/{gid}")
+    public Result<Object> updateMyCollection(@ApiIgnore @CurrentUser User loginUser,
+                                             Integer uid_other, Integer gid) {
+        LOGGER.warn("用户添加我的收藏:{}", "uid_other : " + uid_other + "gid : " + gid);
+        Integer uid = loginUser.getId();
+        Map<String, String> datas = collectService.insertCollects(uid, uid_other, gid);
+        if (!ObjectUtil.isEmpty(datas.get(CommonConstant.SUCCESS))) {
+            return ResultBuilder.success();
+        }
+        return ResultBuilder.fail(datas.get(CommonConstant.FAIL));
     }
 }
