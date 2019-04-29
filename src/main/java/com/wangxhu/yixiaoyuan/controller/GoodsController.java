@@ -2,14 +2,13 @@ package com.wangxhu.yixiaoyuan.controller;
 
 import com.wangxhu.yixiaoyuan.annotation.Authorization;
 import com.wangxhu.yixiaoyuan.annotation.CurrentUser;
-import com.wangxhu.yixiaoyuan.constant.CollectConstant;
-import com.wangxhu.yixiaoyuan.constant.CommonConstant;
-import com.wangxhu.yixiaoyuan.constant.GoodsConstant;
-import com.wangxhu.yixiaoyuan.constant.UserConstant;
+import com.wangxhu.yixiaoyuan.constant.*;
 import com.wangxhu.yixiaoyuan.model.Goods;
+import com.wangxhu.yixiaoyuan.model.Orders;
 import com.wangxhu.yixiaoyuan.model.User;
 import com.wangxhu.yixiaoyuan.service.ICollectService;
 import com.wangxhu.yixiaoyuan.service.IGoodService;
+import com.wangxhu.yixiaoyuan.service.IOrdersService;
 import com.wangxhu.yixiaoyuan.utils.common.ObjectUtil;
 import com.wangxhu.yixiaoyuan.utils.result.Result;
 import com.wangxhu.yixiaoyuan.utils.result.ResultBuilder;
@@ -45,6 +44,9 @@ public class GoodsController {
 
     @Autowired
     private ICollectService collectService;
+
+    @Autowired
+    private IOrdersService ordersService;
 
 
     /**
@@ -181,5 +183,20 @@ public class GoodsController {
         Integer uid = loginUser.getId();
         List<Goods> list = collectService.getAllMyCollects(uid);
         return ResultBuilder.success(list);
+    }
+
+    /**
+     * 获取我的订单列表
+     *
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = OrderConstant.GET_MY_ORDERS, httpMethod = "GET")
+    @ApiImplicitParams({@ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
+    @GetMapping("/get/myOrders")
+    public Result<Object> getMyOrders(@ApiIgnore @CurrentUser User loginUser) {
+        Integer uid = loginUser.getId();
+        List<Orders> ordersList = ordersService.getAllMyOrders(uid);
+        return ResultBuilder.success(ordersList);
     }
 }
