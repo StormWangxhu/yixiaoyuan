@@ -3,10 +3,13 @@ package com.wangxhu.yixiaoyuan.service.impl;
 import com.wangxhu.yixiaoyuan.dao.IOrdersDao;
 import com.wangxhu.yixiaoyuan.model.Orders;
 import com.wangxhu.yixiaoyuan.service.IOrdersService;
+import com.wangxhu.yixiaoyuan.utils.common.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,5 +39,26 @@ public class OrdersServiceImpl implements IOrdersService {
             return null;
         }
         return ordersList;
+    }
+
+
+    /**
+     * 将交易商品添加到我的订单中
+     *
+     * @param gid
+     * @param uid
+     * @return
+     */
+    @Override
+    public boolean addMyOrders(Integer gid, Integer uid) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Orders orders = new Orders();
+        orders.setGid(gid);
+        orders.setUid(uid);
+        orders.setCreateTime(dateFormat.format(new Date()));
+        orders.setOrderNum(new IdUtils(0, 0).nextId());//生成一个订单号
+        orders.setStatus(0);//0代表订单未完成
+        ordersDao.save(orders);
+        return true;
     }
 }

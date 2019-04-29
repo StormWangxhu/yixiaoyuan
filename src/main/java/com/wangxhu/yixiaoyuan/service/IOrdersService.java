@@ -20,4 +20,13 @@ public interface IOrdersService {
      * @return
      */
     List<Orders> getAllMyOrders(Integer uid);
+
+    /**
+     * 将交易商品添加至我的订单中
+     *
+     * @param gid
+     * @param uid
+     * @return
+     */
+    boolean addMyOrders(Integer gid, Integer uid);
 }

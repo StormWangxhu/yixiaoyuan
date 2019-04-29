@@ -199,4 +199,27 @@ public class GoodsController {
         List<Orders> ordersList = ordersService.getAllMyOrders(uid);
         return ResultBuilder.success(ordersList);
     }
+
+
+    /**
+     * 保存我的商品至订单
+     *
+     * @param loginUser
+     * @param gid
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = OrderConstant.ADD_MY_ORDERS, httpMethod = "PUT")
+    @ApiImplicitParams({@ApiImplicitParam(name = "gid", value = CollectConstant.GID, required = true
+            , paramType = "path"),
+            @ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
+    @PutMapping("/add/myOrders/{gid}")
+    public Result<Object> addMyOrders(@ApiIgnore @CurrentUser User loginUser, @PathVariable("gid") Integer gid) {
+        Integer uid = loginUser.getId();
+        boolean result = ordersService.addMyOrders(gid, uid);
+        if (result) {
+            return ResultBuilder.success();
+        }
+        return ResultBuilder.fail();
+    }
 }

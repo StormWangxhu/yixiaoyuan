@@ -1,6 +1,8 @@
 package com.wangxhu.yixiaoyuan.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.persistence.*;
 
@@ -47,7 +49,7 @@ public class Orders {
     /**
      * 订单编号
      */
-    private String orderNum;
+    private long orderNum;
 
     /**
      * 订单状态
@@ -97,11 +99,11 @@ public class Orders {
         this.payTime = payTime;
     }
 
-    public String getOrderNum() {
+    public long getOrderNum() {
         return orderNum;
     }
 
-    public void setOrderNum(String orderNum) {
+    public void setOrderNum(long orderNum) {
         this.orderNum = orderNum;
     }
 

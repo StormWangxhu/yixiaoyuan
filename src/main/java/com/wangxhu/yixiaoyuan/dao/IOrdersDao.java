@@ -25,4 +25,12 @@ public interface IOrdersDao {
      * @return
      */
     List<Orders> getMyOrders(@Param("uid") Integer uid);
+
+    /**
+     * 保存我的订单
+     *
+     * @param orders
+     */
+    void save(@Param("orders") Orders orders);
+
 }
