@@ -222,4 +222,27 @@ public class GoodsController {
         }
         return ResultBuilder.fail();
     }
+
+
+    /**
+     * 用户完成了付款订单，将status设置为 1
+     *
+     * @param loginUser
+     * @param gid
+     * @return
+     */
+    @Authorization
+    @ApiOperation(value = OrderConstant.ADD_MY_ORDERS, httpMethod = "PUT")
+    @ApiImplicitParams({@ApiImplicitParam(name = "gid", value = CollectConstant.GID, required = true
+            , paramType = "path"),
+            @ApiImplicitParam(name = "authorization", value = UserConstant.AUTHORIZATION_TOKEN, required = true, paramType = "header")})
+    @PutMapping("/update/ordersStatus/{gid}")
+    public Result<Object> updateOrdersStatus(@ApiIgnore @CurrentUser User loginUser, @PathVariable("gid") Integer gid) {
+        Integer uid = loginUser.getId();
+        Map<String, String> datas = ordersService.updateStatus(gid, uid);
+        if (!ObjectUtil.isEmpty(datas.get(CommonConstant.FAIL))) {
+            return ResultBuilder.fail(datas.get(CommonConstant.FAIL));
+        }
+        return ResultBuilder.success();
+    }
 }

@@ -11,4 +11,10 @@ public class OrderConstant {
     public static final String GET_MY_ORDERS = "获取我的订单";
 
     public static final String ADD_MY_ORDERS = "商品添加至我的订单";
+
+    public static final Integer NOT_DONE = 0;
+
+    public static final Integer DONE = 1;
+
+    public static final String FININSH = "该订单已经完成！";
 }

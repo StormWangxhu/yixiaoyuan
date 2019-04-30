@@ -1,5 +1,7 @@
 package com.wangxhu.yixiaoyuan.service.impl;
 
+import com.wangxhu.yixiaoyuan.constant.CommonConstant;
+import com.wangxhu.yixiaoyuan.constant.OrderConstant;
 import com.wangxhu.yixiaoyuan.dao.IOrdersDao;
 import com.wangxhu.yixiaoyuan.model.Orders;
 import com.wangxhu.yixiaoyuan.service.IOrdersService;
@@ -8,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author: StormWangxhu
@@ -60,5 +60,31 @@ public class OrdersServiceImpl implements IOrdersService {
         orders.setStatus(0);//0代表订单未完成
         ordersDao.save(orders);
         return true;
+    }
+
+
+    /**
+     * 用户完成了订单
+     *
+     * @param gid
+     * @param uid
+     * @return
+     */
+    @Override
+    public Map<String, String> updateStatus(Integer gid, Integer uid) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Map<String, String> datas = new HashMap<>();
+        Orders orders = ordersDao.queryOrders(gid, uid);
+        Integer status = orders.getStatus();
+        if (status == OrderConstant.DONE) {
+            datas.put(CommonConstant.FAIL, OrderConstant.FININSH);
+            return datas;
+        }
+        orders.setPayTime(dateFormat.format(new Date()));
+        orders.setUid(uid);
+        orders.setGid(gid);
+        ordersDao.updateStatus(orders);
+        datas.put(CommonConstant.SUCCESS, CommonConstant.SUCCESS);
+        return datas;
     }
 }

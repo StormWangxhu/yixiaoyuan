@@ -33,4 +33,20 @@ public interface IOrdersDao {
      */
     void save(@Param("orders") Orders orders);
 
+    /**
+     * 查询订单
+     *
+     * @param gid
+     * @param uid
+     * @return
+     */
+    Orders queryOrders(@Param("gid") Integer gid, @Param("uid") Integer uid);
+
+
+    /**
+     * 更新订单状态
+     *
+     * @param orders
+     */
+    void updateStatus(@Param("orders") Orders orders);
 }

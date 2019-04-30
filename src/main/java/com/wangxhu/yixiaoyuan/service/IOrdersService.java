@@ -3,6 +3,7 @@ package com.wangxhu.yixiaoyuan.service;
 import com.wangxhu.yixiaoyuan.model.Orders;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: StormWangxhu
@@ -29,4 +30,15 @@ public interface IOrdersService {
      * @return
      */
     boolean addMyOrders(Integer gid, Integer uid);
+
+
+    /**
+     * 更新订单状态
+     *
+     * @param gid
+     * @param uid
+     * @return
+     */
+    Map<String, String> updateStatus(Integer gid, Integer uid);
+
 }

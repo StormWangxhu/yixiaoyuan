@@ -1,5 +1,7 @@
 package com.wangxhu.yixiaoyuan.dao;
 
+import com.wangxhu.yixiaoyuan.constant.CommonConstant;
+import com.wangxhu.yixiaoyuan.constant.OrderConstant;
 import com.wangxhu.yixiaoyuan.model.Orders;
 import com.wangxhu.yixiaoyuan.utils.common.IdUtils;
 import org.junit.Test;
@@ -12,7 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: StormWangxhu
@@ -50,6 +54,29 @@ public class IOrdersDaoTest {
         Integer uid = 1;
         List<Orders> ordersList = ordersDao.getMyOrders(uid);
         LOGGER.warn("测试结果:{}", ordersList);
+    }
+
+
+    @Test
+    public void queryOrdersTest() {
+        Integer uid = 1;
+        Integer gid = 1;
+        Orders orders = ordersDao.queryOrders(gid, uid);
+        LOGGER.warn("测试结果:{}", orders);
+    }
+
+    @Test
+    public void updateStatusTest() {
+        Integer uid = 1;
+        Integer gid = 1;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Orders orders = ordersDao.queryOrders(gid, uid);
+        orders.setPayTime(dateFormat.format(new Date()));
+        orders.setUid(uid);
+        orders.setGid(gid);
+        ordersDao.updateStatus(orders);
+        Orders orders1 = ordersDao.queryOrders(gid, uid);
+        LOGGER.warn("测试成功！{}",orders1);
     }
 
 }
